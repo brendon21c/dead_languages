@@ -22,8 +22,32 @@ def home_page():
 
     setup() # inserts into database the first time the program is run. May need to run twice to get to work.
 
+    if request.method == 'POST':
+
+        box_check = request.form.get('check')
+
+        if box_check:
+
+            return_all_languages()
+
+            return redirect(url_for('home_page'))
+
+
+        else:
+
+            selection = request.form['lang']
+            print(selection)
+
+            create_single_map(selection)
+
+            results_page = "maps/language_result.html"
+
+            return render_template("results.html", results = results_page)
+
+
 
     return render_template("home_page.html", name_list = Language.query.all())
+
 
 
 # Check to see if the database is empty, if it is run setup, else break.

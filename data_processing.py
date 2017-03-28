@@ -3,7 +3,7 @@ from models import *
 from app import db
 from sqlalchemy import *
 import logging as log
-
+import folium
 
 def process_inital_data():
 
@@ -57,3 +57,70 @@ def write_to_database():
 
             db.session.add(language_entry)
             db.session.commit()
+
+# This will return the folium map for a single selected language.
+def create_single_map(lang_name):
+
+    threat_level = {
+
+        "Vulnerable" : 'beige',
+        "Definitely endangered" : "green",
+        "Severely endangered" : "orange",
+        "Critically endangered" : 'red',
+        "Extinct" : 'black'
+
+    }
+
+    language_map = folium.Map(location=[40,-120], zoom_start = 2) # Zoom out to include world, TODO try narrowing in on selection.
+
+
+    query = Language.query.filter_by(name = lang_name).all()
+
+    for lang in query:
+
+        lat = lang.latitude
+        lon = lang.longitude
+
+        marker_text = '%s originated in %s, it has %s speakers and a threat level of %s. Description: %s' % (lang.name, lang.origin, lang.speakers, lang.threat_level, lang.description)
+
+        color = threat_level[lang.threat_level]
+
+        marker = folium.Marker([lat, lon], popup = marker_text, icon = folium.Icon(color = color))
+
+        marker.add_to(language_map)
+
+
+    return language_map.save('maps/language_result.html')
+
+def return_all_languages():
+
+    threat_level = {
+
+        "Vulnerable" : 'beige',
+        "Definitely endangered" : "green",
+        "Severely endangered" : "orange",
+        "Critically endangered" : 'red',
+        "Extinct" : 'black'
+
+    }
+
+    language_map = folium.Map(location=[40,-120], zoom_start = 2) # Zoom out to include world, TODO try narrowing in on selection.
+
+
+    query = Language.query.all()
+
+    for lang in query:
+
+        lat = lang.latitude
+        lon = lang.longitude
+
+        marker_text = '%s originated in %s, it has %s speakers and a threat level of %s. Description: %s' % (lang.name, lang.origin, lang.speakers, lang.threat_level, lang.description)
+
+        color = threat_level[lang.threat_level]
+
+        marker = folium.Marker([lat, lon], popup = marker_text, icon = folium.Icon(color = color))
+
+        marker.add_to(language_map)
+
+
+    return language_map.save('maps/all_languages_result.html')
