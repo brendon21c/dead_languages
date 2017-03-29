@@ -66,7 +66,7 @@ def home_page():
 
 
 
-    return render_template("home_page.html", name_list = Language.query.all(), threat_list = threat_level, photo = "threat_count.png")
+    return render_template("home_page.html", name_list = Language.query.all(), threat_list = threat_level, photo = "images/threat_count.png")
 
 
 # @app.route('/<path:filename>')
