@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script>L_PREFER_CANVAS = false; L_NO_TOUCH = false; L_DISABLE_3D = false;</script>
+    <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.0/leaflet.markercluster-src.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.0/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.0/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://rawgit.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css" />
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+            <style> #map_e91eb2db46984331b12a09e5c7c811f4 {
+                position : relative;
+                width : 100.0%;
+                height: 100.0%;
+                left: 0.0%;
+                top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_e91eb2db46984331b12a09e5c7c811f4" ></div>
+        
+</body>
+<script>    
+    
+
+            
+                var southWest = L.latLng(-90, -180);
+                var northEast = L.latLng(90, 180);
+                var bounds = L.latLngBounds(southWest, northEast);
+            
+
+            var map_e91eb2db46984331b12a09e5c7c811f4 = L.map(
+                                  'map_e91eb2db46984331b12a09e5c7c811f4',
+                                  {center: [40,-120],
+                                  zoom: 2,
+                                  maxBounds: bounds,
+                                  layers: [],
+                                  worldCopyJump: false,
+                                  crs: L.CRS.EPSG3857
+                                 });
+            
+        
+    
+            var tile_layer_df7fe97223ab4c1bb1d79aab3fa776c0 = L.tileLayer(
+                'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                {
+                    maxZoom: 18,
+                    minZoom: 1,
+                    continuousWorld: false,
+                    noWrap: false,
+                    attribution: 'Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
+                    detectRetina: false
+                    }
+                ).addTo(map_e91eb2db46984331b12a09e5c7c811f4);
+
+        
+    
+
+            var marker_082d293c1e2b44b49f3407eb96653e00 = L.marker(
+                [40.9798,15.249],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(map_e91eb2db46984331b12a09e5c7c811f4);
+            
+    
+
+                var icon_ea13261ce36f455f801cb49b9e01f7c9 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'beige',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_082d293c1e2b44b49f3407eb96653e00.setIcon(icon_ea13261ce36f455f801cb49b9e01f7c9);
+            
+    
+            var popup_d06104d6df8f40c4997fb02b11d24b56 = L.popup({maxWidth: '300'});
+
+            
+                var html_e7527f6def1841af8de1c21f54974ba4 = $('<div id="html_e7527f6def1841af8de1c21f54974ba4" style="width: 100.0%; height: 100.0%;">South Italian originated in Italy, it has 7500000 speakers and a threat level of Vulnerable. Description: Campania, Lucania (Basilicata), Abruzzi (Abruzzo), Molise, northern Calabria, northern and central Apulia (Puglia), southern Lazio and Marche as well as easternmost Umbria</div>')[0];
+                popup_d06104d6df8f40c4997fb02b11d24b56.setContent(html_e7527f6def1841af8de1c21f54974ba4);
+            
+
+            marker_082d293c1e2b44b49f3407eb96653e00.bindPopup(popup_d06104d6df8f40c4997fb02b11d24b56);
+
+            
+        
+</script>

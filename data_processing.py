@@ -5,6 +5,7 @@ from sqlalchemy import *
 import logging as log
 import folium
 
+
 def process_inital_data():
 
     language_data = []
@@ -96,8 +97,8 @@ def return_all_languages():
 
     threat_level = {
 
-        "Vulnerable" : 'beige',
-        "Definitely endangered" : "green",
+        "Vulnerable" : 'green',
+        "Definitely endangered" : "beige",
         "Severely endangered" : "orange",
         "Critically endangered" : 'red',
         "Extinct" : 'black'
@@ -124,3 +125,38 @@ def return_all_languages():
 
 
     return language_map.save('maps/all_languages_result.html')
+
+
+def get_threat_level_map(threat):
+
+    threat_level = {
+
+        "Vulnerable" : 'green',
+        "Definitely endangered" : "beige",
+        "Severely endangered" : "orange",
+        "Critically endangered" : 'red',
+        "Extinct" : 'black'
+
+    }
+
+
+    language_map = folium.Map(location=[40,-120], zoom_start = 2)
+
+
+    query = Language.query.filter_by(threat_level = threat).all()
+
+    for lang in query:
+
+        lat = lang.latitude
+        lon = lang.longitude
+
+        marker_text = '%s originated in %s, it has %s speakers and a threat level of %s. Description: %s' % (lang.name, lang.origin, lang.speakers, lang.threat_level, lang.description)
+
+        color = threat_level[lang.threat_level]
+
+        marker = folium.Marker([lat, lon], popup = marker_text, icon = folium.Icon(color = color))
+
+        marker.add_to(language_map)
+
+
+    return language_map.save('maps/threat_level_result.html')

@@ -27,7 +27,7 @@
     </div>
 
     <p> Choose a language from the list below to see details about the language.</p>
-    <p> Not all languages have complete details.</p>
+    <p> Not all languages have complete details. Also, if you check the box the program will take a few moments to compile the map.</p>
     <br>
     <div class="w3-container">
       <br>
@@ -44,7 +44,6 @@
 
               <option value="{{ language.name }}">{{ language.name }}</option>
 
-          <!-- Start here, add drop down menu and checkbox to retun one or all languages. -->
               {% endfor %}
 
             </select>
@@ -61,7 +60,43 @@
 
           </div>
 
-          <button class="w3-btn-beige">Submit</button>
+          <button type="submit" name = "button" value="lang_select">Submit</button>
+
+        </div>
+
+      </form>
+
+      <br>
+      <p> From here you can plot languages by threat level. Descriptions taken from data source.
+      <pre>
+
+        - Vulnerable: most children speak the language, but it may be restricted to certain domains (e.g., home).
+        - Definitely endangered: children no longer learn the language as a 'mother tongue' in the home.
+        - Severely endangered: language is spoken by grandparents and older generations; while the parent generation may understand it, they do not speak it to children or among themselves.
+        - Critically endangered: the youngest speakers are grandparents and older, and they speak the language partially and infrequently
+                                 Extinct: there are no speakers left.
+
+      </pre>
+
+      <form class="w3-container" action="{{ request.path }}" method="post">
+
+        <div class="w3-row-padding">
+
+          <div class="w3-third">
+
+            <select class="w3-select w3-border" name="threat_form">
+
+              {% for threat in threat_list %}
+
+              <option value="{{ threat }}">{{ threat }}</option>
+
+              {% endfor %}
+
+            </select>
+
+          </div>
+
+          <button type="submit" name = "button" value="threat_select">Submit</button>
 
         </div>
 

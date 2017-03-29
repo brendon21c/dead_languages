@@ -22,6 +22,15 @@ def home_page():
 
     setup() # inserts into database the first time the program is run. May need to run twice to get to work.
 
+    threat_level = [
+
+        "Vulnerable",
+        "Definitely endangered",
+        "Severely endangered",
+        "Critically endangered",
+        "Extinct"
+    ]
+
     if request.method == 'POST':
 
         box_check = request.form.get('check')
@@ -30,23 +39,38 @@ def home_page():
 
             return_all_languages()
 
-            return redirect(url_for('home_page'))
+            return render_template('results.html', map = '.maps/all_languages_result.html')
 
 
         else:
 
-            selection = request.form['lang']
-            print(selection)
-
-            create_single_map(selection)
-
-            results_page = "maps/language_result.html"
-
-            return render_template("results.html", results = results_page)
+            if request.form['button'] == 'lang_select':
 
 
+                selection = request.form['lang']
+                print(selection)
 
-    return render_template("home_page.html", name_list = Language.query.all())
+                create_single_map(selection)
+
+                return render_template('results.html', map = '.maps/language_result.html')
+
+            if request.form['button'] == 'threat_select':
+
+                threat = request.form['threat_form']
+
+                get_threat_level_map(threat)
+
+                return render_template('results.html', map = '.maps/threat_level_result.html')
+
+
+
+    return render_template("home_page.html", name_list = Language.query.all(), threat_list = threat_level)
+
+# This is not working
+# @app.route('/<path:filename>')
+# def show_map(page_name):
+#
+#     return Flask.send_from_directory(app.maps, page_name)
 
 
 
@@ -61,6 +85,7 @@ def setup():
 
         write_to_database() # add data I want into database.
 
+        return redirect(url_for('home_page'))
 
 
 
