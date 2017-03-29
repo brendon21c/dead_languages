@@ -4,6 +4,9 @@ from app import db
 from sqlalchemy import *
 import logging as log
 import folium
+import matplotlib.pyplot as plt; plt.rcdefaults()
+import numpy as np
+import matplotlib.pyplot as plt
 
 
 def process_inital_data():
@@ -160,3 +163,18 @@ def get_threat_level_map(threat):
 
 
     return language_map.save('maps/threat_level_result.html')
+
+def test_graph():
+
+    # I looked up the numbers via DBBrowser, doing it via code was causing errors in processing.
+    threat_dict = {'Vulnerable' : 627, 'Definitely endangered' : 680, 'Severely endangered' : 554, 'Critically endangered' : 606, 'Extinct' : 252}
+
+    y_pos = np.arange(len(threat_dict))
+
+    plt.bar(range(len(threat_dict)), threat_dict.values(), align='center', alpha=0.5)
+    plt.xticks(range(len(threat_dict)), threat_dict.keys(), rotation = 17 )
+    plt.ylabel('Count')
+    plt.title('Language Threat Level Numbers')
+    plt.tight_layout()
+
+    plt.savefig('threat_count.png')

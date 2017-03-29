@@ -22,6 +22,8 @@ def home_page():
 
     setup() # inserts into database the first time the program is run. May need to run twice to get to work.
 
+    test_graph()
+
     threat_level = [
 
         "Vulnerable",
@@ -64,13 +66,13 @@ def home_page():
 
 
 
-    return render_template("home_page.html", name_list = Language.query.all(), threat_list = threat_level)
+    return render_template("home_page.html", name_list = Language.query.all(), threat_list = threat_level, photo = "threat_count.png")
 
-# This is not working
+
 # @app.route('/<path:filename>')
-# def show_map(page_name):
+# def show_map():
 #
-#     return Flask.send_from_directory(app.maps, page_name)
+#     return render_template('threat_level_result.html')
 
 
 
